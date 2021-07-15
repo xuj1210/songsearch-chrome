@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Options</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      font-family: var(--fontFam), Raleway, sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 1rem;
+      line-height: 1.6;
+      overflow: hidden;
+    }
+
+    #save-confirmation {
+      text-align: center;
+      display: none;
+      background: rgb(137, 255, 137);
+      border-radius: 10px;
+      padding: 8px 10px;
+    }
+
+    .saved {
+      animation-name: saved-anim;
+      animation-fill-mode: forwards;
+      animation-duration: 1s;
+    }
+
+    @keyframes saved-anim {
+      from {
+        top: -10px;
+      }
+
+      to {
+        top: 10%;
+      }
+    }
+
+    .dissapear {
+      animation-name: vanish;
+      animation-duration: 1s;
+    }
+
+    @keyframes vanish {
+      from {
+        opacity: 100;
+      }
+
+      to {
+        opacity: 0;
+      }
+    }
+
+    #wrapper {
+      font-size: 20px;
+      background: white;
+      padding: 1rem;
+      border-radius: 15px;
+    }
+
+    #settings {
+      font-size: 15px;
+
+    }
+
+    #quicksand {
+      font-family: Quicksand, sans-serif;
+    }
+
+    #raleway {
+      font-family: Raleway, sans-serif;
+    }
+
+    #roboto {
+      font-family: Roboto, sans-serif;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      border: 1px rgba(0, 0, 0, 0.45) solid;
+      border-radius: 4px;
+      margin-top: 0.5rem;
+    }
+
+    .dropdown-options {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      padding: 12px 16px;
+      z-index: 1;
+      border-radius: 6px;
+    }
+
+    .dropdown:hover .dropdown-options {
+      display: block;
+    }
+
+    #save {
+
+      min-width: 10%;
+
+      border-radius: 4px;
+      border: none;
+      padding: 5px 15px;
+      background: #ddd;
+      font-weight: 500;
+      font-size: 14px;
+      margin-top: 1em;
+    }
+
+    #save:hover {
+      cursor: pointer;
+    }
+
+    #font-choice {
+      padding: 0.5rem;
+    }
+
+    #quicksand:hover,
+    #raleway:hover,
+    #roboto:hover {
+      cursor: pointer;
+    }
+
+    .center-text {
+      text-align: center;
+    }
+
+    #logo-div {
+      text-align: center;
+      padding: 0;
+      padding-top: 0.8em;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrapper">Settings
+    <hr />
+    <form id="settings">
+      <label for="bg-color">Background color: </label>
+      <input type="color" id="bg-color" value="#dddddd">
+      <br />
+      <div>
+        Choose a font:
+        <span class="dropdown">
+          <span id="font-choice">Raleway (default)</span>
+          <div class="dropdown-options" id="fonts">
+            <p id="raleway">Raleway (default)</p>
+            <p id="quicksand">Quicksand</p>
+            <p id="roboto">Roboto</p>
+          </div>
+        </span>
+      </div>
+      <div class="center-text">
+        <button id="save" type="button">Save</button>
+      </div>
+    </form>
+    <div id="logo-div">
+      <img src="../images/logos/logo-words-filled-small.png" id="logo-img">
+    </div>
+  </div>
+  <script src="options.js"></script>
+</body>
+
+</html>
