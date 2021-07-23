@@ -62,7 +62,7 @@ let handleClear = (event) => {
       let undoMsg = document.createElement('div');
       undoMsg.id = 'undo-msg';
       undoMsg.style.fontFamily = 'Raleway, Roboto, sans-serif';
-      undoMsg.innerHTML = '<span></span><span id="undo-text">Undo</span><span id="close-undo">&#x2715;</span>';
+      undoMsg.innerHTML = '<span></span><span id="undo-text" class="clickable">Undo</span><span id="close-undo" class="clickable">&#x2715;</span>';
       root.append(undoMsg);
 
       // clear history from storage, unless user clicks undo this is permanent
@@ -123,34 +123,35 @@ let createCard = (song) => {
   if (song) {
     let name = song.name;
     let artist = song.artist;
+    let songInfo = `${song.name} ${song.artist}`;
     let newCard = document.createElement('li');
     newCard.innerHTML = `<div class="title">${name}</div><div>${artist}</div>`;
 
     // generate Spotify search link
     let spotifyLink = document.createElement('a');
-    spotifyLink.href = "https://open.spotify.com/search/" + name + ' ' + artist;
+    spotifyLink.href = "https://open.spotify.com/search/" + songInfo;
     spotifyLink.target = "_blank";
     spotifyLink.innerHTML = '<img src="/images/logos/spotify-icon25x25.png" class="logo"></img>'
     spotifyLink.classList.add('logo-link');
 
     // generate Youtube search link
     let youtubeLink = document.createElement('a');
-    youtubeLink.href = "https://youtube.com/results?search_query=" + name + ' ' + artist;
+    youtubeLink.href = "https://youtube.com/results?search_query=" + songInfo;
     youtubeLink.target = "_blank";
     youtubeLink.innerHTML = '<img src="/images/logos/youtube-icon25x25.png" class="logo">';
     youtubeLink.classList.add('logo-link');
 
     // generate Apple Music search link
     let appleMusic = document.createElement('a');
-    appleMusic.href = "https://music.apple.com/us/search?term=" + name + ' ' + artist;
+    appleMusic.href = "https://music.apple.com/us/search?term=" + songInfo;
     appleMusic.target = "_blank";
     appleMusic.innerHTML = '<img src="/images/logos/apple-music-icon.svg" class="logo">';
     youtubeLink.classList.add('logo-link');
 
     // add card to song list in document
     let wrapper = document.createElement('div');
-    wrapper.appendChild(spotifyLink);
     wrapper.appendChild(youtubeLink);
+    wrapper.appendChild(spotifyLink);
     wrapper.appendChild(appleMusic);
     newCard.appendChild(wrapper);
     return newCard;
@@ -222,6 +223,8 @@ function identify_blob(blob, options, cb) {
     .catch((err) => { cb(null, err) });
 }
 
+// end of ACRCloud Music Identification API functions
+
 // handles showing error message to user when the identification API was unable to identify the song
 let handleFail = async () => {
   let failMsg = document.createElement('div');
@@ -271,8 +274,8 @@ chrome.tabCapture.capture({ audio: true, video: false }, (stream) => {
       console.log(mediaRecorder.state);
       console.log('recorder started');
 
-      // once ~5.5 seconds has passed, stop recording audio
-      await sleep(5500)
+      // once ~6 seconds has passed, stop recording audio
+      await sleep(6000)
       mediaRecorder.stop();
       console.log(mediaRecorder.state);
       console.log('recorder stopped');
@@ -284,7 +287,7 @@ chrome.tabCapture.capture({ audio: true, video: false }, (stream) => {
       chunks.push(event.data);
     };
 
-    // when MediaRecorder is stopped (ie. once the ~5.5 seconds has elapsed), perform fetch call to ACRCloud API with audio data
+    // when MediaRecorder is stopped (ie. once the ~6 seconds has elapsed), perform fetch call to ACRCloud API with audio data
     mediaRecorder.onstop = (event) => {
       console.log('recorder stopped, in onstop');
 

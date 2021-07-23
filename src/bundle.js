@@ -1,3 +1,10 @@
+// This file functionally works the same as the code in main.js (main.js code starts
+// at line 26666 in this file). However, since the code in main.js requires NodeJS
+// modules but NodeJS modules don't work in browsers, this file is the 'bundled' 
+// version of main.js. This means that it contains all the code used in the required
+// NodeJS modules, allowing the code from main.js (line 26666 and after) to work
+// as intended when used in the browser (like as a browser extension).
+
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 'use strict';
 
@@ -26720,7 +26727,7 @@ let handleClear = (event) => {
       let undoMsg = document.createElement('div');
       undoMsg.id = 'undo-msg';
       undoMsg.style.fontFamily = 'Raleway, Roboto, sans-serif';
-      undoMsg.innerHTML = '<span></span><span id="undo-text">Undo</span><span id="close-undo">&#x2715;</span>';
+      undoMsg.innerHTML = '<span></span><span id="undo-text" class="clickable">Undo</span><span id="close-undo" class="clickable">&#x2715;</span>';
       root.append(undoMsg);
 
       // clear history from storage, unless user clicks undo this is permanent
@@ -26781,34 +26788,35 @@ let createCard = (song) => {
   if (song) {
     let name = song.name;
     let artist = song.artist;
+    let songInfo = `${song.name} ${song.artist}`;
     let newCard = document.createElement('li');
     newCard.innerHTML = `<div class="title">${name}</div><div>${artist}</div>`;
 
     // generate Spotify search link
     let spotifyLink = document.createElement('a');
-    spotifyLink.href = "https://open.spotify.com/search/" + name + ' ' + artist;
+    spotifyLink.href = "https://open.spotify.com/search/" + songInfo;
     spotifyLink.target = "_blank";
     spotifyLink.innerHTML = '<img src="/images/logos/spotify-icon25x25.png" class="logo"></img>'
     spotifyLink.classList.add('logo-link');
 
     // generate Youtube search link
     let youtubeLink = document.createElement('a');
-    youtubeLink.href = "https://youtube.com/results?search_query=" + name + ' ' + artist;
+    youtubeLink.href = "https://youtube.com/results?search_query=" + songInfo;
     youtubeLink.target = "_blank";
     youtubeLink.innerHTML = '<img src="/images/logos/youtube-icon25x25.png" class="logo">';
     youtubeLink.classList.add('logo-link');
 
     // generate Apple Music search link
     let appleMusic = document.createElement('a');
-    appleMusic.href = "https://music.apple.com/us/search?term=" + name + ' ' + artist;
+    appleMusic.href = "https://music.apple.com/us/search?term=" + songInfo;
     appleMusic.target = "_blank";
     appleMusic.innerHTML = '<img src="/images/logos/apple-music-icon.svg" class="logo">';
     youtubeLink.classList.add('logo-link');
 
     // add card to song list in document
     let wrapper = document.createElement('div');
-    wrapper.appendChild(spotifyLink);
     wrapper.appendChild(youtubeLink);
+    wrapper.appendChild(spotifyLink);
     wrapper.appendChild(appleMusic);
     newCard.appendChild(wrapper);
     return newCard;
@@ -26880,6 +26888,8 @@ function identify_blob(blob, options, cb) {
     .catch((err) => { cb(null, err) });
 }
 
+// end of ACRCloud Music Identification API functions
+
 // handles showing error message to user when the identification API was unable to identify the song
 let handleFail = async () => {
   let failMsg = document.createElement('div');
@@ -26929,8 +26939,8 @@ chrome.tabCapture.capture({ audio: true, video: false }, (stream) => {
       console.log(mediaRecorder.state);
       console.log('recorder started');
 
-      // once ~5.5 seconds has passed, stop recording audio
-      await sleep(5500)
+      // once ~6 seconds has passed, stop recording audio
+      await sleep(6000)
       mediaRecorder.stop();
       console.log(mediaRecorder.state);
       console.log('recorder stopped');
@@ -26942,7 +26952,7 @@ chrome.tabCapture.capture({ audio: true, video: false }, (stream) => {
       chunks.push(event.data);
     };
 
-    // when MediaRecorder is stopped (ie. once the ~5.5 seconds has elapsed), perform fetch call to ACRCloud API with audio data
+    // when MediaRecorder is stopped (ie. once the ~6 seconds has elapsed), perform fetch call to ACRCloud API with audio data
     mediaRecorder.onstop = (event) => {
       console.log('recorder stopped, in onstop');
 

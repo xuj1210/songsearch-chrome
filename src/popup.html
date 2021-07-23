@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
@@ -37,7 +38,6 @@
       padding-bottom: 0.4rem;
     }
 
-
     .alert {
       animation: slide-in-top 4s ease forwards;
     }
@@ -51,7 +51,7 @@
         opacity: 1;
       }
 
-      40% {
+      35% {
         top: 0;
       }
 
@@ -86,13 +86,12 @@
       right: 1em;
     }
 
-    #undo-text:hover,
-    #close-undo:hover {
+    .clickable:hover {
       cursor: pointer;
     }
 
     .show-undo {
-      animation: slide-in-bottom 4s ease forwards;
+      animation: slide-in-bottom 3s ease forwards;
     }
 
     @keyframes slide-in-bottom {
@@ -157,10 +156,6 @@
       width: auto;
     }
 
-    #record-img:hover {
-      cursor: pointer;
-    }
-
     .recording {
       animation-name: recording;
       animation-duration: 1s;
@@ -188,10 +183,6 @@
       top: 15px;
     }
 
-    #settings-img:hover {
-      cursor: pointer;
-    }
-
     .logo-link {
       display: inline;
     }
@@ -211,25 +202,21 @@
     #garbage-img {
       height: 40px;
     }
-
-    #garbage-img:hover {
-      cursor: pointer;
-    }
   </style>
 </head>
 
 <body>
   <div id="wrapper">
     <div id="recording-btn">
-      <img src="/images/record transparent small.png" id="record-img">
-      <img src="/images/settings-cog-small.png" id="settings-img">
+      <img src="/images/record transparent small.png" id="record-img" class="clickable">
+      <img src="/images/settings cog small.png" id="settings-img" class="clickable">
     </div>
     <hr class="styled" />
     <list id="tracks-list">
     </list>
   </div>
   <div id="clear-history">
-    <img src="/images/garbage icon.png" id="garbage-img">
+    <img src="/images/garbage icon small.png" id="garbage-img" class="clickable">
   </div>
   <script src="bundle.js"></script>
 </body>
