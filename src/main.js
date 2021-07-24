@@ -167,8 +167,8 @@ let defaultOptions = {
   signature_version: '1',
   data_type: 'audio',
   secure: true,
-  access_key: '9560a26c96c41c3c73738d454b05915b',
-  access_secret: 'I5s7isETn2UI2D4OvRqgoXs0ZIDOelTbOXG6HRIg'
+  access_key: '7b702e9b6d5f06ad491dc2b5de28da6d',
+  access_secret: 'tnyqWJ3ifFHV9MT8L4yETo5OukVf5m0uBW6yRV2i'
 };
 
 // builds newline separated string from given parameters
@@ -296,7 +296,7 @@ chrome.tabCapture.capture({ audio: true, video: false }, (stream) => {
       // send blob data to ACRCloud API for song identification
       identify_blob(blob, defaultOptions, (err, httpResponse, body) => {
         recordBtn.classList.remove('recording');
-        // console.log(err);
+
         // process response data from ACRCloud API
         let songInfo = extractInfo(err);
 
