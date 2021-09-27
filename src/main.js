@@ -154,6 +154,7 @@ let createCard = (song) => {
     wrapper.appendChild(spotifyLink);
     wrapper.appendChild(appleMusic);
     newCard.appendChild(wrapper);
+    newCard.classList.add('song-card');
     return newCard;
   }
 }
