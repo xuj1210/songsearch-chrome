@@ -47,7 +47,7 @@ let robotoFont = "Roboto, sans-serif";
 let changeFont = (font) => {
   console.log('changing font');
   root.style.setProperty('--fontFam', font);
-}
+};
 
 // handle changing font to Quicksand
 let handleQuicksand = () => {
@@ -80,8 +80,8 @@ roboto.addEventListener('click', handleRoboto);
 
 // function to emulate pausing for given amount of milliseconds
 const sleep = (milliseconds) => {
-  return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+};
 
 // handle saving user inputs to Chrome storage
 let handleSave = (event) => {
@@ -94,6 +94,6 @@ let handleSave = (event) => {
     await sleep(1200);
     saveBtn.style.background = oldColour;
     saveBtn.innerText = 'Save';
-  })
-}
+  });
+};
 saveBtn.addEventListener('click', handleSave);
