@@ -26789,14 +26789,14 @@ let createCard = (song) => {
     let spotifyLink = document.createElement('a');
     spotifyLink.href = "https://open.spotify.com/search/" + songInfo;
     spotifyLink.target = "_blank";
-    spotifyLink.innerHTML = '<img src="/images/logos/spotify-icon25x25.png" class="logo"></img>'
+    spotifyLink.innerHTML = '<img src="/images/logos/spotify-icon100x100.png" class="logo"></img>'
     spotifyLink.classList.add('logo-link');
 
     // generate Youtube search link
     let youtubeLink = document.createElement('a');
     youtubeLink.href = "https://youtube.com/results?search_query=" + songInfo;
     youtubeLink.target = "_blank";
-    youtubeLink.innerHTML = '<img src="/images/logos/youtube-icon25x25.png" class="logo">';
+    youtubeLink.innerHTML = '<img src="/images/logos/yt-icon100x100.png" class="logo">';
     youtubeLink.classList.add('logo-link');
 
     // generate Apple Music search link
