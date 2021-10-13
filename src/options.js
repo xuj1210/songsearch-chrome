@@ -19,8 +19,8 @@ chrome.storage.sync.get(['bgColor', 'font'], (result) => {
     bgColor.value = result.bgColor;
     body.style.background = result.bgColor;
   } else {
-    bgColor.value = '#c1c0fc'
-    body.style.background = '#c1c0fc'
+    bgColor.value = '#a19eff'
+    body.style.background = '#a19eff'
   }
   // if font is already set, use it
   if (result.font) {
