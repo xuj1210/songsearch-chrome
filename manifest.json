@@ -1,7 +1,7 @@
 {
   "name": "SongSearch - What's that song?",
   "description": "Discover songs and artists just by listening to them in your browser!",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "manifest_version": 3,
   "permissions": [
     "storage",

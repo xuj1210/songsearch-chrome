@@ -26663,9 +26663,10 @@ let recordBtn = document.getElementById('record-img');
 let songList = document.getElementById('tracks-list');
 let settingsBtn = document.getElementById('settings-img');
 let garbageBtn = document.getElementById('garbage-img');
+let hrElems = document.getElementsByTagName('hr');
 
 // load chosen background color and font, or just load default options
-chrome.storage.sync.get(['bgColor', 'font'], (result => {
+chrome.storage.sync.get(['bgColor', 'font', 'darkToggle'], (result => {
   // check if bgColor is already set, if it is use it
   if (result.bgColor) {
     body.style.background = result.bgColor;
@@ -26678,6 +26679,13 @@ chrome.storage.sync.get(['bgColor', 'font'], (result => {
     root.style.setProperty('--font-fam', result.font);
   } else {
     root.style.setProperty('--fontFam', 'Raleway');
+  }
+
+  // check if dark mode is set, if it is change icons
+  if (result.darkToggle) {
+    settingsBtn.src = "../images/cogs-purewhite100x100.png";
+    garbageBtn.src = "../images/garbage-purewhite100x100.png";
+    hrElems[0].classList.add('dark-mode');
   }
 }));
 

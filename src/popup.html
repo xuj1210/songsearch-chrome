@@ -115,14 +115,22 @@
     hr.styled {
       border: 0;
       height: 0;
-      /* border-bottom: 1px solid rgb(0, 0, 0); */
-      border-bottom: 1px solid #222;
+      
       border-radius: 100%;
       margin: 0;
       margin-bottom: 1em;
       width: 92%;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    hr.regular-mode {
+      border-bottom: 1px solid #222;
+    }
+
+    hr.dark-mode {
+      border-bottom: 1px solid rgb(255, 255, 255);
+      /* border-bottom: 1px solid #e8eaed; */
     }
 
     li.song-card {
@@ -219,7 +227,7 @@
       <img src="/images/mic3-100x100.png" id="record-img" class="clickable">
       <img src="/images/cogs100x100.png" id="settings-img" class="settings-img-style clickable">
     </div>
-    <hr class="styled" />
+    <hr class="styled regular-mode" />
     <list id="tracks-list">
     </list>
   </div>

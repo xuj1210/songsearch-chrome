@@ -5,6 +5,7 @@ let bgColor = document.getElementById('bg-color');
 let saveBtn = document.getElementById('save');
 let saveConfirm = document.getElementById('save-confirmation');
 let fontSelection = document.getElementById('font-choice');
+let darkToggle = document.getElementById('dark-mode-toggle')
 let quicksand = document.getElementById('quicksand');
 let raleway = document.getElementById('raleway');
 let roboto = document.getElementById('roboto');
@@ -13,7 +14,7 @@ let roboto = document.getElementById('roboto');
 let currentFont = 'Raleway';
 
 // get user saved settings for background color and font
-chrome.storage.sync.get(['bgColor', 'font'], (result) => {
+chrome.storage.sync.get(['bgColor', 'font', 'darkToggle'], (result) => {
   // if background color is already set, use it
   if (result.bgColor) {
     bgColor.value = result.bgColor;
@@ -26,6 +27,10 @@ chrome.storage.sync.get(['bgColor', 'font'], (result) => {
   if (result.font) {
     root.style.setProperty('--font', result.font);
     currentFont = result.font;
+  }
+  // if dark mode is on, set toggle to checked
+  if (result.darkToggle) {
+    darkToggle.checked = true;
   }
   // change current font displayed
   fontSelection.innerText = currentFont + ' (current)';
@@ -59,7 +64,7 @@ let handleQuicksand = () => {
 
 // handle changing font to Raleway
 let handleRaleway = () => {
-  fontSelection.innerText = 'Raleway (default)';
+  fontSelection.innerText = 'Raleway';
   // fontSelection.style.fontFamily = ralewayFont;
   currentFont = 'Raleway';
   changeFont('Raleway');
@@ -85,9 +90,10 @@ const sleep = (milliseconds) => {
 
 // handle saving user inputs to Chrome storage
 let handleSave = (event) => {
-  chrome.storage.sync.set({ "bgColor": bgColor.value, "font": currentFont }, async () => {
+  chrome.storage.sync.set({ "bgColor": bgColor.value, "font": currentFont, "darkToggle": darkToggle.checked }, async () => {
     console.log('Background color set to %cthis', `color: ${bgColor.value}`);
     console.log(`Changed font to ${currentFont}`);
+    console.log('Dark toggle set to ' + darkToggle.checked);
     saveBtn.innerText = 'Saved!'
     let oldColour = saveBtn.style.background;
     saveBtn.style.background = '#77eeab'
